@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир шрифтов: от классики до экзотики</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Pacifico&family=Orbitron:wght@400;700&family=Comforter+Brush&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin: 40px 0 30px;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #3498db;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .fonts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .font-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .font-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .font-header {
+            padding: 25px;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+
+        .font-name {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .font-category {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .font-body {
+            padding: 25px;
+        }
+
+        .font-preview {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .font-chars {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .font-info {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .font-info p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .font-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .size-slider {
+            width: 70%;
+        }
+
+        .color-picker {
+            width: 25%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .interactive-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 50px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .text-input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .font-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .font-option {
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .font-option:hover {
+            background: #f8f9fa;
+        }
+
+        .font-option.active {
+            border-color: #3498db;
+            background: #e8f4fc;
+        }
+
+        .preview-area {
+            min-height: 200px;
+            padding: 30px;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-label {
+            font-weight: bold;
+            min-width: 80px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .fonts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .font-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Мир шрифтов</h1>
+            <p class="subtitle">От классических до экзотических — исследуйте разнообразие типографики и создавайте уникальные текстовые композиции</p>
+        </header>
+
+        <h2 class="section-title">Основные шрифты</h2>
+        <div class="fonts-grid">
+            <!-- Times New Roman -->
+            <div class="font-card">
+                <div class="font-header">
+                    <div class="font-name">Times New Roman</div>
+                    <div class="font-category">Классическая антиква</div>
+                </div>
+                <div class="font-body">
+                    <div class="font-preview" style="font-family: 'Times New Roman', serif;">
+                        Съешь же ещё этих мягких французских булок
+                    </div>
+                    <div class="font-chars" style="font-family: 'Times New Roman', serif;">
+                        <span>Aa</span>
+                        <span>Бб</span>
+                        <span>123</span>
+                        <span>!?</span>
+                    </div>
+                    <div class="font-info">
+                        <p><strong>Характеристики:</strong> Классический, официальный, читаемый</p>
+                        <p><strong>Использование:</strong> Печатные издания, официальные документы, академические работы</p>
+                        <div class="font-controls">
+                            <input type="range" class="size-slider" min="16" max="72" value="40" oninput="updateFontSize(this, 'times-preview')">
+                            <input type="color" class="color-picker" value="#2c3e50" oninput="updateFontColor(this, 'times-preview')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arial -->
+            <div class="font-card">
+                <div class="font-header">
+                    <div class="font-name">Arial</div>
+                    <div class="font-category">Стандартный гротеск</div>
+                </div>
+                <div class="font-body">
+                    <div class="font-preview" style="font-family: Arial, sans-serif;">
+                        Съешь же ещё этих мягких французских булок
+                    </div>
+                    <div class="font-chars" style="font-family: Arial, sans-serif;">
+                        <span>Aa</span>
+                        <span>Бб</span>
+                        <span>123</span>
+                        <span>!?</span>
+                    </div>
+                    <div class="font-info">
+                        <p><strong>Характеристики:</strong> Чистый, универсальный, нейтральный</p>
+                        <p><strong>Использование:</strong> Веб-сайты, интерфейсы, презентации, документы</p>
+                        <div class="font-controls">
+                            <input type="range" class="size-slider" min="16" max="72" value="40" oninput="updateFontSize(this, 'arial-preview')">
+                            <input type="color" class="color-picker" value="#2c3e50" oninput="updateFontColor(this, 'arial-preview')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roboto -->
+            <div class="font-card">
+                <div class="font-header">
+                    <div class="font-name">Roboto</div>
+                    <div class="font-category">Современный гротеск</div>
+                </div>
+                <div class="font-body">
+                    <div class="font-preview" style="font-family: 'Roboto', sans-serif;">
+                        Съешь же ещё этих мягких французских булок
+                    </div>
+                    <div class="font-chars" style="font-family: 'Roboto', sans-serif;">
+                        <span>Aa</span>
+                        <span>Бб</span>
+                        <span>123</span>
+                        <span>!?</span>
+                    </div>
+                    <div class="font-info">
+                        <p><strong>Характеристики:</strong> Чёткий, современный, универсальный</p>
+                        <p><strong>Использование:</strong> Интерфейсы, веб-сайты, мобильные приложения</p>
+                        <div class="font-controls">
+                            <input type="range" class="size-slider" min="16" max="72" value="40" oninput="updateFontSize(this, 'roboto-preview')">
+                            <input type="color" class="color-picker" value="#2c3e50" oninput="updateFontColor(this, 'roboto-preview')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Экзотические шрифты</h2>
+        <div class="fonts-grid">
+            <!-- Pacifico -->
+            <div class="font-card">
+                <div class="font-header">
+                    <div class="font-name">Pacifico</div>
+                    <div class="font-category">Рукописный шрифт</div>
+                </div>
+                <div class="font-body">
+                    <div class="font-preview" style="font-family: 'Pacifico', cursive;">
+                        Съешь же ещё этих мягких французских булок
+                    </div>
+                    <div class="font-chars" style="font-family: 'Pacifico', cursive;">
+                        <span>Aa</span>
+                        <span>Бб</span>
+                        <span>123</span>
+                        <span>!?</span>
+                    </div>
+                    <div class="font-info">
+                        <p><strong>Характеристики:</strong> Неформальный, дружелюбный, рукописный</p>
+                        <p><strong>Использование:</strong> Логотипы, приглашения, креативный дизайн</p>
+                        <div class="font-controls">
+                            <input type="range" class="size-slider" min="16" max="72" value="40" oninput="updateFontSize(this, 'pacifico-preview')">
+                            <input type="color" class="color-picker" value="#2c3e50" oninput="updateFontColor(this, 'pacifico-preview')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orbitron -->
+            <div class="font-card">
+                <div class="font-header">
+                    <div class="font-name">Orbitron</div>
+                    <div class="font-category">Футуристический шрифт</div>
+                </div>
+                <div class="font-body">
+                    <div class="font-preview" style="font-family: 'Orbitron', sans-serif;">
+                        Съешь же ещё этих мягких французских булок
+                    </div>
+                    <div class="font-chars" style="font-family: 'Orbitron', sans-serif;">
+                        <span>Aa</span>
+                        <span>Бб</span>
+                        <span>123</span>
+                        <span>!?</span>
+                    </div>
+                    <div class="font-info">
+                        <p><strong>Характеристики:</strong> Футуристический, технологичный, геометрический</p>
+                        <p><strong>Использование:</strong> Научная фантастика, технологии, игры</p>
+                        <div class="font-controls">
+                            <input type="range" class="size-slider" min="16" max="72" value="40" oninput="updateFontSize(this, 'orbitron-preview')">
+                            <input type="color" class="color-picker" value="#2c3e50" oninput="updateFontColor(this, 'orbitron-preview')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comforter Brush -->
+            <div class="font-card">
+                <div class="font-header">
+                    <div class="font-name">Comforter Brush</div>
+                    <div class="font-category">Каллиграфический шрифт</div>
+                </div>
+                <div class="font-body">
+                    <div class="font-preview" style="font-family: 'Comforter Brush', cursive;">
+                        Съешь же ещё этих мягких французских булок
+                    </div>
+                    <div class="font-chars" style="font-family: 'Comforter Brush', cursive;">
+                        <span>Aa</span>
+                        <span>Бб</span>
+                        <span>123</span>
+                        <span>!?</span>
+                    </div>
+                    <div class="font-info">
+                        <p><strong>Характеристики:</strong> Элегантный, каллиграфический, выразительный</p>
+                        <p><strong>Использование:</strong> Приглашения, логотипы, художественные проекты</p>
+                        <div class="font-controls">
+                            <input type="range" class="size-slider" min="16" max="72" value="40" oninput="updateFontSize(this, 'comforter-preview')">
+                            <input type="color" class="color-picker" value="#2c3e50" oninput="updateFontColor(this, 'comforter-preview')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="interactive-section">
+            <h2 class="section-title">Создайте свою текстовую композицию</h2>
+            
+            <input type="text" class="text-input" id="custom-text" placeholder="Введите ваш текст здесь..." value="Съешь же ещё этих мягких французских булок">
+            
+            <div class="font-selector">
+                <div class="font-option active" data-font="'Times New Roman', serif" onclick="selectFont(this)">
+                    <div style="font-family: 'Times New Roman', serif;">Times New Roman</div>
+                </div>
+                <div class="font-option" data-font="Arial, sans-serif" onclick="selectFont(this)">
+                    <div style="font-family: Arial, sans-serif;">Arial</div>
+                </div>
+                <div class="font-option" data-font="'Roboto', sans-serif" onclick="selectFont(this)">
+                    <div style="font-family: 'Roboto', sans-serif;">Roboto</div>
+                </div>
+                <div class="font-option" data-font="'Pacifico', cursive" onclick="selectFont(this)">
+                    <div style="font-family: 'Pacifico', cursive;">Pacifico</div>
+                </div>
+                <div class="font-option" data-font="'Orbitron', sans-serif" onclick="selectFont(this)">
+                    <div style="font-family: 'Orbitron', sans-serif;">Orbitron</div>
+                </div>
+                <div class="font-option" data-font="'Comforter Brush', cursive" onclick="selectFont(this)">
+                    <div style="font-family: 'Comforter Brush', cursive;">Comforter Brush</div>
+                </div>
+            </div>
+            
+            <div class="preview-area" id="custom-preview">
+                Съешь же ещё этих мягких французских булок
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <span class="control-label">Размер:</span>
+                    <input type="range" id="custom-size" min="16" max="72" value="32" oninput="updateCustomPreview()">
+                    <span id="size-value">32px</span>
+                </div>
+                
+                <div class="control-group">
+                    <span class="control-label">Цвет:</span>
+                    <input type="color" id="custom-color" value="#2c3e50" oninput="updateCustomPreview()">
+                </div>
+                
+                <div class="control-group">
+                    <span class="control-label">Насыщенность:</span>
+                    <select id="custom-weight" onchange="updateCustomPreview()">
+                        <option value="300">Светлый</option>
+                        <option value="400" selected>Обычный</option>
+                        <option value="600">Полужирный</option>
+                        <option value="700">Жирный</option>
+                    </select>
+                </div>
+                
+                <button class="btn" onclick="resetCustomPreview()">Сбросить</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2023 Мир шрифтов | Исследуйте искусство типографики</p>
+        </footer>
+    </div>
+
+    <script>
+        // Функции для обновления размера и цвета шрифта в карточках
+        function updateFontSize(slider, fontId) {
+            const preview = slider.closest('.font-card').querySelector('.font-preview');
+            preview.style.fontSize = slider.value + 'px';
+        }
+        
+        function updateFontColor(picker, fontId) {
+            const preview = picker.closest('.font-card').querySelector('.font-preview');
+            preview.style.color = picker.value;
+        }
+        
+        // Функции для интерактивной секции
+        let selectedFont = "'Times New Roman', serif";
+        
+        function selectFont(element) {
+            document.querySelectorAll('.font-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            element.classList.add('active');
+            selectedFont = element.getAttribute('data-font');
+            updateCustomPreview();
+        }
+        
+        function updateCustomPreview() {
+            const preview = document.getElementById('custom-preview');
+            const text = document.getElementById('custom-text').value || 'Введите текст';
+            const size = document.getElementById('custom-size').value;
+            const color = document.getElementById('custom-color').value;
+            const weight = document.getElementById('custom-weight').value;
+            
+            preview.textContent = text;
+            preview.style.fontFamily = selectedFont;
+            preview.style.fontSize = size + 'px';
+            preview.style.color = color;
+            preview.style.fontWeight = weight;
+            
+            document.getElementById('size-value').textContent = size + 'px';
+        }
+        
+        function resetCustomPreview() {
+            document.getElementById('custom-text').value = 'Съешь же ещё этих мягких французских булок';
+            document.getElementById('custom-size').value = 32;
+            document.getElementById('custom-color').value = '#2c3e50';
+            document.getElementById('custom-weight').value = 400;
+            
+            document.querySelectorAll('.font-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            document.querySelector('.font-option').classList.add('active');
+            selectedFont = "'Times New Roman', serif";
+            
+            updateCustomPreview();
+        }
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCustomPreview();
+        });
+    </script>
+</body>
+</html>
